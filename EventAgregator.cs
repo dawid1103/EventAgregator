@@ -13,11 +13,11 @@ namespace EventAgregator
     public sealed class EventAgregator : IEventAgregator
     {
         private static readonly EventAgregator instance = new EventAgregator();
+        private readonly Dictionary<Type, IList> subscribers = new Dictionary<Type, IList>();
+        public static EventAgregator Instance { get { return instance; } }
+
         static EventAgregator() { }
         private EventAgregator() { }
-        private readonly Dictionary<Type, IList> subscribers = new Dictionary<Type, IList>();
-
-        public static EventAgregator Instance { get { return instance; } }
 
         public static void Publish<TMessageType>(TMessageType message)
         {
